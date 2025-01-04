@@ -1,5 +1,7 @@
 import errno
 import matplotlib
+from security import safe_command
+
 matplotlib.use('Agg')
 import shutil
 from subprocess import Popen, PIPE, check_output, STDOUT
@@ -80,7 +82,7 @@ def execute_with_realtime_output(command, directory, env=None):
         print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
         print('>> Executing command: %s'%command)
         print('>> --------------------------------------------------------------')
-        p = Popen(shlex.split(command),
+        p = safe_command.run(Popen, shlex.split(command),
                   stdout=PIPE,
                   stderr=STDOUT,
                   cwd=directory,
