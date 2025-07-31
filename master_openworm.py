@@ -254,7 +254,7 @@ execute_with_realtime_output('ls -alt %s'%latest_subdir, os.environ['SIBERNETIC_
 
 # Remove black frames at the beginning of the recorded video
 command = "ffmpeg -i %s/%s -vf blackdetect=d=0:pic_th=0.70:pix_th=0.10 -an -f null - 2>&1 | grep blackdetect" % (new_sim_out, sibernetic_movie_name)
-outstr = str(check_output(command, shell=True).decode('utf-8'))
+outstr = str(check_output(command, shell=False).decode('utf-8'))
 outstr = outstr.split('\n')
 
 black_start = 0.0
